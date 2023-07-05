@@ -57,6 +57,7 @@ class DropDownTextField extends StatefulWidget {
       this.padding,
       this.textStyle,
       this.onChanged,
+      this.listTextDirection,
       this.validator,
       this.isEnabled = true,
       this.enableSearch = false,
@@ -124,6 +125,7 @@ class DropDownTextField extends StatefulWidget {
       this.listPadding,
       this.listTextStyle,
       this.checkBoxProperty,
+      this.listTextDirection,
       this.autovalidateMode})
       : assert(initialValue == null || controller == null,
             "you cannot add both initialValue and multiController\nset initial value using controller\n\tMultiValueDropDownController(data:initial value)"),
@@ -142,6 +144,7 @@ class DropDownTextField extends StatefulWidget {
         singleController = null,
         searchDecoration = null,
         keyboardType = null,
+
         // keyboardHeight = 0,
         super(key: key);
 
@@ -244,6 +247,8 @@ class DropDownTextField extends StatefulWidget {
   ///customize checkbox property
   final CheckBoxProperty? checkBoxProperty;
 
+  final TextDirection? listTextDirection;
+
   @override
   _DropDownTextFieldState createState() => _DropDownTextFieldState();
 }
@@ -281,6 +286,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
   late double _keyboardHeight;
   late TextStyle _listTileTextStyle;
   late ListPadding _listPadding;
+
   @override
   void initState() {
     _cnt = TextEditingController();
@@ -360,10 +366,10 @@ class _DropDownTextFieldState extends State<DropDownTextField>
 
   Size _textWidgetSize(String text, TextStyle style) {
     final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text, style: style),
-        maxLines: 1,
-        textDirection: TextDirection.ltr)
-      ..layout(minWidth: 0, maxWidth: double.infinity);
+      text: TextSpan(text: text, style: style),
+      maxLines: 1,
+      textDirection: widget.listTextDirection ?? TextDirection.rtl,
+    )..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size;
   }
 
@@ -665,7 +671,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
                 builder: buildOverlay,
               ))),
     );
-    overlay?.insert(_isScrollPadding ? _entry2! : _entry!);
+    overlay.insert(_isScrollPadding ? _entry2! : _entry!);
   }
 
   _openOutSideClickOverlay(BuildContext context) {
@@ -683,7 +689,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
         ),
       );
     });
-    overlay2?.insert(_barrierOverlay!);
+    overlay2.insert(_barrierOverlay!);
   }
 
   void hideOverlay() {
@@ -1022,11 +1028,14 @@ class _SingleSelectionState extends State<SingleSelection> {
                         bottom: widget.listPadding.bottom,
                         top: widget.listPadding.top),
                     child: Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: AlignmentDirectional.centerEnd,
                       child: FittedBox(
                         fit: BoxFit.fitHeight,
-                        child: Text(newDropDownList[index].name,
-                            style: widget.listTextStyle),
+                        child: Text(
+                          newDropDownList[index].name,
+                          style: widget.listTextStyle,
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                     ),
                   ),

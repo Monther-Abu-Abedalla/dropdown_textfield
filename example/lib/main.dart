@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TestPage2(),
+      home: const TestPage(),
     );
   }
 }
@@ -88,22 +88,22 @@ class _TestPageState extends State<TestPage> {
                   dropDownItemCount: 6,
 
                   dropDownList: const [
-                    DropDownValueModel(name: 'name1', value: "value1"),
+                    DropDownValueModel(name: 'محمد', value: "value1"),
                     DropDownValueModel(
-                        name: 'name2',
+                        name: 'محمد',
                         value: "value2",
                         toolTipMsg:
                             "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                    DropDownValueModel(name: 'name3', value: "value3"),
+                    DropDownValueModel(name: 'محمد', value: "value3"),
                     DropDownValueModel(
-                        name: 'name4',
+                        name: 'محمد',
                         value: "value4",
                         toolTipMsg:
                             "DropDownButton is a widget that we can use to select one unique value from a set of values"),
-                    DropDownValueModel(name: 'name5', value: "value5"),
-                    DropDownValueModel(name: 'name6', value: "value6"),
-                    DropDownValueModel(name: 'name7', value: "value7"),
-                    DropDownValueModel(name: 'name8', value: "value8"),
+                    DropDownValueModel(name: 'محمد', value: "value5"),
+                    DropDownValueModel(name: 'محمد', value: "value6"),
+                    DropDownValueModel(name: 'محمد', value: "value7"),
+                    DropDownValueModel(name: 'محمد', value: "value8"),
                   ],
                   onChanged: (val) {},
                 ),

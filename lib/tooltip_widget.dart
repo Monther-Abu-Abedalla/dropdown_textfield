@@ -177,7 +177,7 @@ class _ToolTipWidgetState extends State<ToolTipWidget> {
         ],
       );
     });
-    overlayState?.insert(overlayEntry);
+    overlayState.insert(overlayEntry);
   }
 
   closeOverlay() {
