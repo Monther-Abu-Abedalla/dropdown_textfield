@@ -57,6 +57,7 @@ class DropDownTextField extends StatefulWidget {
       this.padding,
       this.textStyle,
       this.onChanged,
+      this.searchFieldTextStyle,
       this.listTextDirection,
       this.validator,
       this.isEnabled = true,
@@ -126,6 +127,7 @@ class DropDownTextField extends StatefulWidget {
       this.listTextStyle,
       this.checkBoxProperty,
       this.listTextDirection,
+      this.searchFieldTextStyle,
       this.autovalidateMode})
       : assert(initialValue == null || controller == null,
             "you cannot add both initialValue and multiController\nset initial value using controller\n\tMultiValueDropDownController(data:initial value)"),
@@ -248,6 +250,8 @@ class DropDownTextField extends StatefulWidget {
   final CheckBoxProperty? checkBoxProperty;
 
   final TextDirection? listTextDirection;
+
+  final TextStyle? searchFieldTextStyle;
 
   @override
   _DropDownTextFieldState createState() => _DropDownTextFieldState();
@@ -769,6 +773,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
               ),
               child: !widget.isMultiSelection
                   ? SingleSelection(
+                      searchFieldTextStyle: widget.searchFieldTextStyle,
                       mainController: _cnt,
                       autoSort: !widget.readOnly,
                       mainFocusNode: _textFieldFocusNode,
@@ -888,6 +893,7 @@ class SingleSelection extends StatefulWidget {
       this.onSearchSubmit,
       this.listTextStyle,
       this.searchDecoration,
+      this.searchFieldTextStyle,
       required this.listPadding,
       this.clearIconProperty})
       : super(key: key);
@@ -910,6 +916,7 @@ class SingleSelection extends StatefulWidget {
   final ListPadding listPadding;
   final InputDecoration? searchDecoration;
   final IconProperty? clearIconProperty;
+  final TextStyle? searchFieldTextStyle;
 
   @override
   State<SingleSelection> createState() => _SingleSelectionState();
@@ -971,6 +978,7 @@ class _SingleSelectionState extends State<SingleSelection> {
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextField(
+                style: widget.searchFieldTextStyle,
                 focusNode: widget.searchFocusNode,
                 showCursor: widget.searchShowCursor,
                 keyboardType: widget.searchKeyboardType,
